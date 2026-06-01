@@ -1,0 +1,121 @@
+name: Build & Release
+
+# Triggers:
+#   - Push a tag like v1.0.0 -> builds Win+Mac binaries and creates a GitHub
+#     Release with both .zip files attached for public download.
+#   - Manual trigger (workflow_dispatch) -> builds, uploads artifacts only,
+#     no release.
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            label: windows
+            asset_glob: dist/AGM_Final_Set-windows-*.zip
+          - os: macos-latest
+            label: macos
+            asset_glob: dist/AGM_Final_Set-macos-*.zip
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pyinstaller
+
+      - name: Compute version
+        id: version
+        shell: bash
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=dev-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build demo Master_Input
+        run: python sample/build_demo.py
+
+      - name: Run PyInstaller
+        run: python -m PyInstaller agm_final_set.spec --noconfirm
+
+      - name: Stage release (macOS)
+        if: matrix.os == 'macos-latest'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          STAGE="dist/AGM_Final_Set-${VERSION}-macos"
+          mkdir -p "$STAGE"
+          cp dist/AGM_Final_Set "$STAGE/"
+          cp README.md LICENSE "$STAGE/"
+          [ -f USAGE.md ]   && cp USAGE.md   "$STAGE/"
+          [ -f PRIVACY.md ] && cp PRIVACY.md "$STAGE/"
+          cp sample/Master_Input_DEMO.xlsx "$STAGE/"
+          cp sample/Master_Input_EMPTY.xlsx "$STAGE/"
+          cd dist && zip -r "AGM_Final_Set-macos-${VERSION}.zip" "AGM_Final_Set-${VERSION}-macos"
+
+      - name: Stage release (Windows)
+        if: matrix.os == 'windows-latest'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        shell: pwsh
+        run: |
+          $stage = "dist/AGM_Final_Set-$env:VERSION-windows"
+          New-Item -ItemType Directory -Force -Path $stage | Out-Null
+          Copy-Item dist/AGM_Final_Set.exe $stage/
+          Copy-Item README.md, LICENSE $stage/
+          if (Test-Path USAGE.md) { Copy-Item USAGE.md $stage/ }
+          Copy-Item sample/Master_Input_DEMO.xlsx $stage/
+          Copy-Item sample/Master_Input_EMPTY.xlsx $stage/
+          Compress-Archive -Path $stage -DestinationPath "dist/AGM_Final_Set-windows-$env:VERSION.zip" -Force
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AGM_Final_Set-${{ matrix.label }}
+          path: ${{ matrix.asset_glob }}
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: List artifacts
+        run: ls -lhR artifacts
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            artifacts/AGM_Final_Set-windows/*.zip
+            artifacts/AGM_Final_Set-macos/*.zip

@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Excel temp / lock files
+~$*.xlsx
+~$*.docx
+
+# Generated output (regenerable from master input)
+# Comment out the line below if you want to commit a sample output
+# output/Final_Set.docx
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# PyInstaller build artifacts
+build/
+dist/
+*.spec.bak
+
+# Real client master files — never publish these.
+# The DEMO file under sample/ ships with releases; everything else is private.
+master/Master_Input.xlsx
+master/Master_Input*.xlsx
+master/*.bak.xlsx
+master/*.bak
+!sample/Master_Input_DEMO.xlsx
