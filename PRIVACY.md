@@ -115,7 +115,7 @@ The application performs no network communication of any kind. The only data mov
 
 ## Open source — verify everything yourself
 
-The full source code is published under the MIT License at [github.com/cbsshekhawat18/agm_automation](https://github.com/cbsshekhawat18/agm_automation). You can:
+The full source code is published under the MIT License at [github.com/cbsshekhawat18-lab/agm_automation](https://github.com/cbsshekhawat18-lab/agm_automation). You can:
 
 - Read every line that touches your data.
 - Build the binary yourself from source instead of downloading the release.
@@ -135,7 +135,7 @@ We may update this policy when the application gains new file-access behavior or
 
 **Publisher:** Chandrabhan Shekhawat — Gigai Kripa Services
 
-For bug reports, feature requests, or privacy questions, open an issue at the project's GitHub repository: [github.com/cbsshekhawat18/agm_automation/issues](https://github.com/cbsshekhawat18/agm_automation/issues).
+For bug reports, feature requests, or privacy questions, open an issue at the project's GitHub repository: [github.com/cbsshekhawat18-lab/agm_automation/issues](https://github.com/cbsshekhawat18-lab/agm_automation/issues).
 
 We don't operate a server — there's no support ticket system, no data-export endpoint, and no account to suspend. Because all data stays on your device, we have no copy to give you on request and nothing to delete server-side. Delete the application folder to wipe everything locally.
 

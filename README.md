@@ -47,7 +47,7 @@ If your firm's IT policy requires client data to stay on a single machine — th
 | Windows | `AGM_Final_Set-windows-vX.Y.Z.zip` | ~15 MB |
 | macOS   | `AGM_Final_Set-macos-vX.Y.Z.zip`   | ~14 MB |
 
-Download from the [Releases](https://github.com/cbsshekhawat18/agm_automation/releases) page. No Python install needed — the binary is self-contained.
+Download from the [Releases](https://github.com/cbsshekhawat18-lab/agm_automation/releases) page. No Python install needed — the binary is self-contained.
 
 ---
 
@@ -83,7 +83,7 @@ Every cell maps to a specific paragraph in the doc. See [USAGE.md → Toggle Ref
 ## Running from source (developers only)
 
 ```bash
-git clone https://github.com/cbsshekhawat18/agm_automation
+git clone https://github.com/cbsshekhawat18-lab/agm_automation
 cd agm_automation
 pip install -r requirements.txt
 python generate_final_set.py        # uses master/Master_Input.xlsx by convention
@@ -144,7 +144,7 @@ agm_automation/
    - Builds the Windows binary on a Windows runner
    - Creates a GitHub Release named `v1.0.0`
    - Attaches both zips as downloadable assets
-4. Share the release URL: `https://github.com/cbsshekhawat18/agm_automation/releases/tag/v1.0.0`
+4. Share the release URL: `https://github.com/cbsshekhawat18-lab/agm_automation/releases/tag/v1.0.0`
 
 No code signing yet, so users will see:
 - **Windows**: SmartScreen "Unknown publisher" → click "More info" → "Run anyway"
@@ -158,7 +158,7 @@ Add code signing later if you want to remove these warnings.
 
 The cheapest, most professional path:
 
-1. **Create a public GitHub repo** at `github.com/cbsshekhawat18/agm_automation`.
+1. **Create a public GitHub repo** at `github.com/cbsshekhawat18-lab/agm_automation`.
 2. **Push the code** — everything in this folder.
 3. **Push a tag** (`git tag v1.0.0 && git push --tags`). The workflow builds both binaries and creates a public Release with download links.
 4. **(Optional) Landing page** — turn on GitHub Pages from `Settings → Pages`. Point it at the `main` branch + `/docs` folder, or use a static site generator. Free.
@@ -177,8 +177,8 @@ Released under the MIT License — see [LICENSE](LICENSE) for the full text. Fre
 ## Contact
 
 **Publisher:** Chandrabhan Shekhawat — Gigai Kripa Services
-Bugs / feature requests / privacy questions: [open a GitHub issue](https://github.com/cbsshekhawat18/agm_automation/issues).
+Bugs / feature requests / privacy questions: [open a GitHub issue](https://github.com/cbsshekhawat18-lab/agm_automation/issues).
 
 ## Contact
 
-Bugs / feature requests: open a GitHub issue. Maintained by [@cbsshekhawat18](https://github.com/cbsshekhawat18).
+Bugs / feature requests: open a GitHub issue. Maintained by [@cbsshekhawat18-lab](https://github.com/cbsshekhawat18-lab).
