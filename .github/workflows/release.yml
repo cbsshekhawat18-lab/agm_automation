@@ -49,8 +49,10 @@ jobs:
             echo "version=dev-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Build demo Master_Input
-        run: python sample/build_demo.py
+      # NOTE: sample/Master_Input_DEMO.xlsx and Master_Input_EMPTY.xlsx are
+      # committed into the repo (the real master/Master_Input.xlsx is gitignored
+      # because it holds client data). Don't re-run build_demo.py here — it
+      # needs master/ which isn't present in CI.
 
       - name: Run PyInstaller
         run: python -m PyInstaller agm_final_set.spec --noconfirm
