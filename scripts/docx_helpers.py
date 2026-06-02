@@ -19,17 +19,18 @@ from docx.oxml import OxmlElement
 # Document setup
 # ============================================================
 def new_doc():
-    """Return a fresh Document with default font Cambria 11 / 1.1 line spacing, A4 portrait, 1" margins."""
+    """Return a fresh Document with default font Cambria 11 / 1.35 line spacing, A4 portrait, 1" margins."""
     doc = Document()
     style = doc.styles["Normal"]
     style.font.name = "Cambria"
     style.font.size = Pt(11)
-    # Default body spacing — 2pt after each paragraph is just enough to
-    # separate body lines without wasting half-a-line per paragraph. Heading
-    # space_before still stacks on top to produce visual section breaks.
+    # Comfortable reading rhythm: 1.35 line spacing gives each line breathing
+    # room without ballooning the page count, and 6pt after each paragraph
+    # creates a clear visual break between sentences/clauses. Heading
+    # space_before stacks on top so section breaks still feel distinct.
     style.paragraph_format.space_before = Pt(0)
-    style.paragraph_format.space_after = Pt(2)
-    style.paragraph_format.line_spacing = 1.1
+    style.paragraph_format.space_after = Pt(6)
+    style.paragraph_format.line_spacing = 1.35
     rpr = style.element.get_or_add_rPr()
     rfonts = rpr.find(qn("w:rFonts"))
     if rfonts is None:
@@ -70,14 +71,14 @@ def add_para(doc, text="", bold=False, align=None, size=None, after=None, italic
     if text:
         add_run(p, text, bold=bold, italic=italic, size=size)
     # Default body spacing — overridable via `after` (use after=0 for true tight blocks).
-    p.paragraph_format.space_after = Pt(after if after is not None else 2)
+    p.paragraph_format.space_after = Pt(after if after is not None else 6)
     return p
 
 
 def add_justified(doc, text):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_after = Pt(6)
     add_run(p, text)
     return p
 
@@ -484,8 +485,8 @@ def _shade_cell(cell, fill_hex):
 def add_centered_heading(doc, text, size=13, underline=True):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(8)
-    p.paragraph_format.space_after = Pt(4)
+    p.paragraph_format.space_before = Pt(12)
+    p.paragraph_format.space_after = Pt(8)
     p.paragraph_format.keep_with_next = True
     add_run(p, text, bold=True, size=size, underline=underline)
     return p
@@ -493,8 +494,8 @@ def add_centered_heading(doc, text, size=13, underline=True):
 
 def add_section_heading(doc, text, size=11):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(6)
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_before = Pt(10)
+    p.paragraph_format.space_after = Pt(6)
     p.paragraph_format.keep_with_next = True
     add_run(p, text, bold=True, size=size, underline=True)
     return p
@@ -504,7 +505,7 @@ def add_numbered_item(doc, number, text_bold, text_rest=""):
     """Like '1. **Title:** rest of text' as one paragraph."""
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_after = Pt(6)
     add_run(p, f"{number}. ", bold=True)
     add_run(p, text_bold, bold=True)
     if text_rest:

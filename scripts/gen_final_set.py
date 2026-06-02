@@ -44,15 +44,15 @@ from docx_helpers import (
 def _justify(doc, text):
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_after = Pt(6)
     add_run(p, text)
     return p
 
 
 def _heading_numbered(doc, num, text):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(6)
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_before = Pt(10)
+    p.paragraph_format.space_after = Pt(6)
     p.paragraph_format.keep_with_next = True
     add_run(p, f"{num}. ", bold=True)
     add_run(p, text, bold=True, underline=True)
@@ -61,8 +61,8 @@ def _heading_numbered(doc, num, text):
 
 def _heading_lettered(doc, letter, text):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(4)
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_before = Pt(8)
+    p.paragraph_format.space_after = Pt(4)
     p.paragraph_format.keep_with_next = True
     add_run(p, f"{letter}) ", bold=True)
     add_run(p, text, bold=True, underline=True)
