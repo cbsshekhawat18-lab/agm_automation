@@ -77,7 +77,7 @@ def add_para(doc, text="", bold=False, align=None, size=None, after=None, italic
 
 def add_justified(doc, text):
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(6)
     add_run(p, text)
     return p
@@ -504,7 +504,7 @@ def add_section_heading(doc, text, size=11):
 def add_numbered_item(doc, number, text_bold, text_rest=""):
     """Like '1. **Title:** rest of text' as one paragraph."""
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(6)
     add_run(p, f"{number}. ", bold=True)
     add_run(p, text_bold, bold=True)

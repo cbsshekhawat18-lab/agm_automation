@@ -43,7 +43,7 @@ from docx_helpers import (
 # =====================================================================
 def _justify(doc, text):
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(6)
     add_run(p, text)
     return p
@@ -218,7 +218,7 @@ def section_notice(doc, data):
     add_centered_heading(doc, "NOTICE", size=13, underline=True)
 
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     add_run(p, "NOTICE ", bold=True)
     add_run(p, "is hereby given that the ")
     add_run(p, f"{agm['number']} ", bold=True)
@@ -237,7 +237,7 @@ def section_notice(doc, data):
 
     ord_count += 1
     p = doc.add_paragraph(style="List Number")
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     add_run(p, "To receive, consider and adopt the Audited Balance Sheet as on ")
     add_run(p, agm["fy_end_date"], bold=True)
     add_run(p, ", the Profit and Loss Account for the year ended on that date and the Reports of the Directors and Auditors thereon.")
@@ -245,13 +245,13 @@ def section_notice(doc, data):
     if yes(toggles, "AuditorReappointment"):
         ord_count += 1
         p = doc.add_paragraph(style="List Number")
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "To re-appoint ")
         add_run(p, f"{aud['firm_name']}, {aud['designation']} (Firm Registration No. {aud['frn']}) ", bold=True)
         add_run(p, "as Statutory Auditor of the Company and pass the following resolution:")
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.left_indent = Inches(0.4)
         add_run(p, "\u201cResolved that ", bold=True)
         add_run(p, "pursuant to the provisions of Section 139 and other applicable provisions, if any, of the Companies Act, 2013 and the Rules framed there under, as amended from time to time, ")
@@ -259,7 +259,7 @@ def section_notice(doc, data):
         add_run(p, f"be and are hereby re-appointed as Auditors of the Company to hold office from the conclusion of this Annual General Meeting till the conclusion of the Annual General Meeting held in F.Y. {aud['tenure_end_fy']} of the Company, at such remuneration plus service tax, out of pocket, travelling and living expenses, etc., as may be mutually agreed between the Board of Directors of the Company and the Auditors.\u201d")
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.left_indent = Inches(0.4)
         add_run(p, "\u201cResolved further that ", bold=True)
         add_run(p, "any Director of the company be and are hereby individually/severally authorized to digitally sign and file e-form ADT-1 with the Registrar of Companies and to do all such things, deeds, acts which may deem necessary to give effect of the aforesaid resolution.\u201d")
@@ -272,13 +272,13 @@ def section_notice(doc, data):
     for dc in regs:
         sno += 1
         p = doc.add_paragraph(style="List Number")
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "To regularize the appointment of ")
         add_run(p, f"{dc['name']} (DIN: {dc['din']}), ", bold=True)
         add_run(p, "as the Director of the Company.")
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.left_indent = Inches(0.4)
         add_run(p, "\u201cResolved that ", bold=True)
         add_run(p, "in accordance with the provision of Section 161(1), read with Section 152 of the Companies Act, 2013 and the Rules made there under (including any statutory modification(s) or re-enactment thereof), and the Article of Association of the Company, ")
@@ -288,7 +288,7 @@ def section_notice(doc, data):
         add_run(p, ".\u201d")
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.left_indent = Inches(0.4)
         add_run(p, "\u201cResolved Further That ", bold=True)
         add_run(p, "any Director of the Company of the company be and are hereby individually/severally authorized to digitally sign and file e-form DIR-12 with the Registrar of Companies and to do all such things, deeds, acts which may deem necessary to give effect of the aforesaid resolution.\u201d")
@@ -296,17 +296,17 @@ def section_notice(doc, data):
     for rpt in rpts:
         sno += 1
         p = doc.add_paragraph(style="List Number")
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "To approve the related party transactions under section 188 of the Companies Act, 2013 with ")
         add_run(p, f"{_rpt_titled(rpt)}.", bold=True)
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.left_indent = Inches(0.4)
         add_run(p, "To consider and if thought fit, to pass, with or without modification(s), the following resolution as Ordinary Resolution:")
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.left_indent = Inches(0.4)
         add_run(p, "\u201cResolved That ", bold=True)
         add_run(p, "pursuant to the provisions of Section 188 of the Companies Act, 2013 (\u201cAct\u201d) and other applicable provisions, if any, read with Rule 15 of the Companies (Meetings of Board and its Powers) Rules, 2014, (including any amendments, modifications, variations or re-enactments thereof for the time being in force), the consent of the members of the Company be and is hereby accorded for carrying out and / or continuing with arrangements and transactions with ")
@@ -316,7 +316,7 @@ def section_notice(doc, data):
         add_run(p, " each.\u201d")
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.left_indent = Inches(0.4)
         add_run(p, "\u201cResolved Further That ", bold=True)
         add_run(p, "for the purpose of giving effect to the above resolution, the Board of Directors of the Company be and are hereby authorized to do all acts, deeds and things in their absolute discretion that may be considered necessary, proper and expedient or incidental for the purpose of giving effect to this resolution in the interest of the Company.\u201d")
@@ -341,7 +341,7 @@ def section_notice(doc, data):
     ]
     for i, note in enumerate(notes, start=1):
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, f"{i}. ", bold=True)
         add_run(p, note)
 
@@ -353,7 +353,7 @@ def section_notice(doc, data):
             size=11, underline=True,
         )
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "As required by Section 102(1) of the Companies Act, 2013 (the Act), the following Explanatory Statement set out the material facts relating to the Special Business:")
 
         item_no = ord_count
@@ -371,18 +371,18 @@ def section_notice(doc, data):
             # the regularization of Director in accordance with the provision
             # of Section 161(1), read with Section 152 of the Companies Act, 2013."
             p = doc.add_paragraph()
-            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             add_run(p, f"{dc['name']} (DIN: {dc['din']}) ", bold=True)
             add_run(p, "was appointed as an Additional Director in the Meeting of Board of Directors held on ")
             add_run(p, f"{dc['appt_dotted']}", bold=True)
             add_run(p, f". The Board feels that presence of {dc['name']} on the Board is desirable and would be beneficial to the company. Thus, Board recommend to the shareholders for the regularization of Director in accordance with the provision of Section 161(1), read with Section 152 of the Companies Act, 2013.")
 
             p = doc.add_paragraph()
-            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             add_run(p, f"In the opinion of the Board and the disclosures made by {dc['name']}, he/she fulfills all the criteria for appointment as Director of the Company.")
 
             p = doc.add_paragraph()
-            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             add_run(p, f"Accordingly, the Board recommends passing of the resolution at Item No. {item_no} of the Notice as an Ordinary Resolution.")
 
         for rpt in rpts:
@@ -392,7 +392,7 @@ def section_notice(doc, data):
             add_run(p, f"To approve the related party transactions under section 188 of the Companies Act, 2013 with {_rpt_titled(rpt)}", bold=True)
 
             p = doc.add_paragraph()
-            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             add_run(p, "As per Section 188 of the Companies Act, 2013 (\u201cthe Act\u201d), transactions with related parties which are on arm\u2019s length basis and in the ordinary course of business, approval of shareholders is required for sale or purchase of goods or services, amounting to 10% or more of the turnover of the Company.")
 
             p = doc.add_paragraph()
@@ -410,7 +410,7 @@ def section_notice(doc, data):
                                col_widths_inches=[0.7, 3.0, 3.5])
 
             p = doc.add_paragraph()
-            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             add_run(p, f"The Board recommends the Ordinary Resolution as set out in Item No. {item_no} of this Notice for approval of the Members.")
 
     # Route Map
@@ -503,7 +503,7 @@ def section_directors_report(doc, data):
     ]
     for pt in drs_points:
         p = doc.add_paragraph(pt, style="List Bullet")
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
     # 5. Frauds
     _heading_numbered(doc, 5, "Reporting of Frauds by Auditors:")
@@ -609,7 +609,7 @@ def section_directors_report(doc, data):
                 col_widths_inches=[0.6, 1.1, 5.1])
         else:
             p = doc.add_paragraph()
-            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT
             p.paragraph_format.space_after = Pt(4)
             add_run(p, "The following material changes and commitments have occurred during the period between the end of the financial year to which the financial statements relate and the date of this Report ")
             add_run(p, "(Specify the Changes if any)", bold=True)
@@ -795,13 +795,19 @@ def section_directors_report(doc, data):
     else:
         _justify(doc, "As the Company does not have any female employee. Therefore, the provisions of the Maternity Benefit Act, 1961 are not applicable to the Company.")
 
-    # 27. Employees
+    # 27. Employees — Transgender row is suppressed when the count is 0 / blank.
+    # Most small private companies don't have any transgender employees, and the
+    # user asked for the row to be hidden in that case to avoid an awkward empty
+    # statutory line.
     _heading_numbered(doc, 27, "Number of Employees:")
+    emp_rows = [
+        ["1.", "Female", str(emp["female"])],
+        ["2.", "Male", str(emp["male"])],
+    ]
+    if int(emp.get("transgender", 0) or 0) > 0:
+        emp_rows.append([str(len(emp_rows) + 1) + ".", "Transgender", str(emp["transgender"])])
     add_bordered_table(doc, ["S. No.", "Category of Employees", "Number of Employees"],
-        [["1.", "Female", str(emp["female"])],
-         ["2.", "Male", str(emp["male"])],
-         ["3.", "Transgender", str(emp["transgender"])]],
-        col_widths_inches=[0.7, 3.0, 2.5])
+        emp_rows, col_widths_inches=[0.7, 3.0, 2.5])
 
     # 28. Others
     _heading_numbered(doc, 28, "Others:")
@@ -890,7 +896,7 @@ def section_directors_report(doc, data):
     if yes(toggles, "AuditorReportInDirReport") or yes(toggles, "AuditorReappointment"):
         first_term_end_year = _fy_end_year(agm.get("curr_fy_end", ""))
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.space_after = Pt(4)
         add_run(p, "Pursuant to the provisions of Section 139 of Companies Act, 2013 read with the Companies (Audit and Auditors) Rules, 2014, (including any statutory or re-enactment thereof for the time being in force) ")
         add_run(p, f"{aud['firm_name']}, {aud['designation']} (Firm Registration No. {aud['frn']})", bold=True)
@@ -909,7 +915,7 @@ def section_directors_report(doc, data):
             term_phrase = f"{term:02d} Financial Years"
         agm_date_long = _format_date_long(agm.get("date", ""))
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.space_after = Pt(4)
         add_run(p, f"In the upcoming Annual General Meeting going to be held on {agm['day'].title()}, {agm_date_long}, ")
         add_run(p, f"{aud['firm_name']}, {aud['designation']} (Firm Registration No. {aud['frn']})", bold=True)
@@ -982,7 +988,7 @@ def section_aoc2(doc, data):
 
     add_para(doc, "")
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     add_run(p, "Form for Disclosure of particulars of contracts/arrangements entered into by the company with related parties referred to in sub-section (1) of section 188 of the Companies Act, 2013 including certain arm\u2019s length transactions under third proviso thereto.")
 
     add_para(doc, "")
@@ -1236,7 +1242,7 @@ def section_director_attendance(doc, data):
 
     add_para(doc, "")
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     add_run(p, "Note: Above declaration is given by directors of the company that they were presented in the meeting of Board of Directors on above mentioned dates.",
             bold=True, size=10)
 
@@ -1259,7 +1265,7 @@ def section_resolution_director(doc, data):
             _new_page_with_letterhead(doc, data)
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "Certified True Copy of the Resolution Passed in the ", bold=True)
         add_run(p, f"{agm['number']} Annual General Meeting of Members held on ", bold=True)
         add_run(p, f"{agm['day'].title()}, {agm['date_words']} ", bold=True)
@@ -1274,7 +1280,7 @@ def section_resolution_director(doc, data):
 
         add_para(doc, "")
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "\u201cResolved that ", bold=True)
         add_run(p, "in accordance with the provision of Section 161(1), read with Section 152 of the Companies Act, 2013 and the Rules made there under (including any statutory modification(s) or re-enactment thereof), and the Article of Association of the Company, ")
         add_run(p, f"{dc['name']} (DIN: {dc['din']}), ", bold=True)
@@ -1284,7 +1290,7 @@ def section_resolution_director(doc, data):
 
         add_para(doc, "")
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "\u201cResolved Further That ", bold=True)
         add_run(p, "any Director of the Company of the company be and are hereby individually/severally authorized to digitally sign and file e-form DIR-12 with the Registrar of Companies and to do all such things, deeds, acts which may deem necessary to give effect of the aforesaid resolution.\u201d")
 
@@ -1316,7 +1322,7 @@ def section_resolution_rpt(doc, data):
             _new_page_with_letterhead(doc, data)
 
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "Certified True Copy of the Resolution Passed in the ", bold=True)
         add_run(p, f"{agm['number']} Annual General Meeting of Members held on ", bold=True)
         add_run(p, f"{agm['day'].title()}, {agm['date_words']} ", bold=True)
@@ -1331,7 +1337,7 @@ def section_resolution_rpt(doc, data):
 
         add_para(doc, "")
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "\u201cResolved that ", bold=True)
         add_run(p, "pursuant to the provisions of Section 188 of the Companies Act, 2013 (\u201cAct\u201d) and other applicable provisions, if any, read with Rule 15 of the Companies (Meetings of Board and its Powers) Rules, 2014, (including any amendments, modifications, variations or re-enactments thereof for the time being in force), the consent of the members of the Company be and is hereby accorded for carrying out and / or continuing with arrangements and transactions with ")
         add_run(p, f"{_rpt_titled(rpt)}, ", bold=True)
@@ -1341,7 +1347,7 @@ def section_resolution_rpt(doc, data):
 
         add_para(doc, "")
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         add_run(p, "Resolved further that ", bold=True)
         add_run(p, "for the purpose of giving effect to the above resolution, the Board of Directors of the Company be and are hereby authorized to do all acts, deeds and things in their absolute discretion that may be considered necessary, proper and expedient or incidental for the purpose of giving effect to this resolution in the interest of the Company.\u201d")
 
@@ -1367,7 +1373,7 @@ def section_resolution_auditor(doc, data):
     company = data["company"]
 
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     add_run(p, "Certified True Copy of the Resolution Passed in the ", bold=True)
     add_run(p, f"{agm['number']} Annual General Meeting of Members held on ", bold=True)
     add_run(p, f"{agm['day'].title()}, {agm['date_words']} ", bold=True)
@@ -1378,7 +1384,7 @@ def section_resolution_auditor(doc, data):
 
     add_para(doc, "")
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     add_run(p, "\u201cRESOLVED THAT ", bold=True)
     add_run(p, "pursuant to the provisions of Section 139 and other applicable provisions, if any, of the Companies Act, 2013 and the Rules framed there under, as amended from time to time, ")
     add_run(p, f"{aud['firm_name']}, {aud['designation']} (Firm Registration No. {aud['frn']}) ", bold=True)
@@ -1386,7 +1392,7 @@ def section_resolution_auditor(doc, data):
 
     add_para(doc, "")
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     add_run(p, "\u201cRESOLVED FURTHER THAT ", bold=True)
     add_run(p, "any Director of the Company be and are hereby individually/severally authorized to digitally sign and file e-form ADT-1 with the Registrar of Companies and to do all such things, deeds, acts which may deem necessary to give effect of the aforesaid resolution.\u201d")
 
@@ -1439,15 +1445,15 @@ def section_intimation_letter(doc, data):
     p = doc.add_paragraph(); p.paragraph_format.space_after = Pt(4)
     add_run(p, "Respected Sir/Ma\u2019am,", size=BODY)
 
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(4)
     add_run(p, "With reference to the above subject, we wish to re-appoint you as the Statutory Auditors of our company.", size=BODY)
 
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(4)
     add_run(p, f"Please let us know that whether you are duly qualified and eligible for this re-appointment as per the provisions of Section 139 and 141 of the Companies Act 2013 and rules made there under and provide your written consent to act as Statutory Auditors of the Company from the conclusion of this Annual General Meeting of the company till the Annual General Meeting held for Financial Year ending {aud['tenure_end_fy']} for term of {aud['term_years']} Years.", size=BODY)
 
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(4)
     add_run(p, "You are also requested to issue a certificate to the Company under Section 139(1) of the Companies Act 2013.", size=BODY)
 
@@ -1524,20 +1530,20 @@ def section_consent_letter(doc, data):
     p.paragraph_format.space_after = Pt(6)
     add_run(p, f"Address: {company['address']}", bold=True, size=BODY)
 
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(4)
     add_run(p, f"Sub: Re-Appointment as Statutory Auditors of the Company for Financial Year {term_short} to Financial Year {term_long_end}.", bold=True, underline=True, size=BODY)
 
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(4)
     add_run(p, "We thank you for your letter, informing us that it is proposed to Re-appoint ", size=BODY)
     add_run(p, f"{aud['firm_name']}", bold=True, size=BODY)
     add_run(p, f". as Statutory Auditors of the Company for Financial Year {term_short} to Financial Year {term_long_end}.", size=BODY)
 
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(2)
     add_run(p, "We would be happy to accept the appointment, if made.", size=BODY)
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(4)
     add_run(p, "Further, as required under section 139(1) of the Companies Act, 2013 (“the Act”), we further certify, declare and confirm that:", size=BODY)
 
@@ -1550,13 +1556,13 @@ def section_consent_letter(doc, data):
     ]
     for i, decl in enumerate(declarations, start=1):
         p = doc.add_paragraph()
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         p.paragraph_format.left_indent = Inches(0.4)
         p.paragraph_format.space_after = Pt(2)
         add_run(p, f"{i}) ", size=BODY)
         add_run(p, decl, size=BODY)
 
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     p.paragraph_format.space_after = Pt(4)
     add_run(p, "Assuring you of our best attention always. We further assure you our best professional services at all times.", size=BODY)
 
@@ -1623,7 +1629,7 @@ def section_designated_person_letter(doc, data):
 
     add_para(doc, "")
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
     add_run(p, "Subject: ", bold=True, underline=True)
     add_run(p, "Details of designated person for furnishing and extending co-operation for providing information to the Registrar or any other authorized officer with respect to beneficial interest in shares of the Company.", bold=True, underline=True)
 
