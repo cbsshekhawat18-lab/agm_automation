@@ -236,23 +236,25 @@ def section_notice(doc, data):
     ord_count = 0
 
     ord_count += 1
-    p = doc.add_paragraph(style="List Number")
+    p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    add_run(p, f"{ord_count}. ", bold=True)
     add_run(p, "To receive, consider and adopt the Audited Balance Sheet as on ")
     add_run(p, agm["fy_end_date"], bold=True)
     add_run(p, ", the Profit and Loss Account for the year ended on that date and the Reports of the Directors and Auditors thereon.")
 
     if yes(toggles, "AuditorReappointment"):
         ord_count += 1
-        p = doc.add_paragraph(style="List Number")
+        p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        add_run(p, f"{ord_count}. ", bold=True)
         add_run(p, "To re-appoint ")
         add_run(p, f"{aud['firm_name']}, {aud['designation']} (Firm Registration No. {aud['frn']}) ", bold=True)
         add_run(p, "as Statutory Auditor of the Company and pass the following resolution:")
 
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.left_indent = Inches(0.4)
+        # left_indent removed — keep resolution body aligned with item text above
         add_run(p, "\u201cResolved that ", bold=True)
         add_run(p, "pursuant to the provisions of Section 139 and other applicable provisions, if any, of the Companies Act, 2013 and the Rules framed there under, as amended from time to time, ")
         add_run(p, f"{aud['firm_name']}, {aud['designation']} (Firm Registration No. {aud['frn']}) ", bold=True)
@@ -260,7 +262,7 @@ def section_notice(doc, data):
 
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.left_indent = Inches(0.4)
+        # left_indent removed — keep resolution body aligned with item text above
         add_run(p, "\u201cResolved further that ", bold=True)
         add_run(p, "any Director of the company be and are hereby individually/severally authorized to digitally sign and file e-form ADT-1 with the Registrar of Companies and to do all such things, deeds, acts which may deem necessary to give effect of the aforesaid resolution.\u201d")
 
@@ -271,15 +273,16 @@ def section_notice(doc, data):
     sno = ord_count
     for dc in regs:
         sno += 1
-        p = doc.add_paragraph(style="List Number")
+        p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        add_run(p, f"{sno}. ", bold=True)
         add_run(p, "To regularize the appointment of ")
         add_run(p, f"{dc['name']} (DIN: {dc['din']}), ", bold=True)
         add_run(p, "as the Director of the Company.")
 
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.left_indent = Inches(0.4)
+        # left_indent removed — keep resolution body aligned with item text above
         add_run(p, "\u201cResolved that ", bold=True)
         add_run(p, "in accordance with the provision of Section 161(1), read with Section 152 of the Companies Act, 2013 and the Rules made there under (including any statutory modification(s) or re-enactment thereof), and the Article of Association of the Company, ")
         add_run(p, f"{dc['name']} (DIN: {dc['din']}), ", bold=True)
@@ -289,25 +292,26 @@ def section_notice(doc, data):
 
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.left_indent = Inches(0.4)
+        # left_indent removed — keep resolution body aligned with item text above
         add_run(p, "\u201cResolved Further That ", bold=True)
         add_run(p, "any Director of the Company of the company be and are hereby individually/severally authorized to digitally sign and file e-form DIR-12 with the Registrar of Companies and to do all such things, deeds, acts which may deem necessary to give effect of the aforesaid resolution.\u201d")
 
     for rpt in rpts:
         sno += 1
-        p = doc.add_paragraph(style="List Number")
+        p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        add_run(p, f"{sno}. ", bold=True)
         add_run(p, "To approve the related party transactions under section 188 of the Companies Act, 2013 with ")
         add_run(p, f"{_rpt_titled(rpt)}.", bold=True)
 
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.left_indent = Inches(0.4)
+        # left_indent removed — keep resolution body aligned with item text above
         add_run(p, "To consider and if thought fit, to pass, with or without modification(s), the following resolution as Ordinary Resolution:")
 
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.left_indent = Inches(0.4)
+        # left_indent removed — keep resolution body aligned with item text above
         add_run(p, "\u201cResolved That ", bold=True)
         add_run(p, "pursuant to the provisions of Section 188 of the Companies Act, 2013 (\u201cAct\u201d) and other applicable provisions, if any, read with Rule 15 of the Companies (Meetings of Board and its Powers) Rules, 2014, (including any amendments, modifications, variations or re-enactments thereof for the time being in force), the consent of the members of the Company be and is hereby accorded for carrying out and / or continuing with arrangements and transactions with ")
         add_run(p, f"{_rpt_titled(rpt)} ", bold=True)
@@ -317,7 +321,7 @@ def section_notice(doc, data):
 
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.left_indent = Inches(0.4)
+        # left_indent removed — keep resolution body aligned with item text above
         add_run(p, "\u201cResolved Further That ", bold=True)
         add_run(p, "for the purpose of giving effect to the above resolution, the Board of Directors of the Company be and are hereby authorized to do all acts, deeds and things in their absolute discretion that may be considered necessary, proper and expedient or incidental for the purpose of giving effect to this resolution in the interest of the Company.\u201d")
 
@@ -1557,7 +1561,7 @@ def section_consent_letter(doc, data):
     for i, decl in enumerate(declarations, start=1):
         p = doc.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.left_indent = Inches(0.4)
+        # left_indent removed — keep resolution body aligned with item text above
         p.paragraph_format.space_after = Pt(2)
         add_run(p, f"{i}) ", size=BODY)
         add_run(p, decl, size=BODY)
