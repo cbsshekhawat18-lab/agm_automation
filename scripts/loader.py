@@ -657,6 +657,20 @@ def load_master(path):
                 "description": str(ws.cell(row=r, column=3).value or "").strip(),
             })
 
+    # ---- Fallback: derive EGM rows from MaterialChanges when there's no
+    # EGMMeetings tab (older master templates kept EGM info on MaterialChanges).
+    # We pull any MaterialChanges row whose description mentions an EGM.
+    # The doc's EGM table then renders automatically — no manual data move.
+    if not egm_meetings and material_changes:
+        for mc in material_changes:
+            desc = mc.get("description", "") or ""
+            if "extra ordinary general meeting" in desc.lower() or "extraordinary general meeting" in desc.lower() or " egm " in desc.lower():
+                egm_meetings.append({
+                    "sno": len(egm_meetings) + 1,
+                    "date": mc.get("event_date", ""),
+                    "description": desc,
+                })
+
     # ---------- BusinessNatureChanges (tabular: gated by Toggles!ChangeInBusinessNature) ----------
     business_nature_changes = []
     if "BusinessNatureChanges" in wb.sheetnames:
