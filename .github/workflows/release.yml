@@ -82,7 +82,8 @@ jobs:
           New-Item -ItemType Directory -Force -Path $stage | Out-Null
           Copy-Item dist/AGM_Final_Set.exe $stage/
           Copy-Item README.md, LICENSE $stage/
-          if (Test-Path USAGE.md) { Copy-Item USAGE.md $stage/ }
+          if (Test-Path USAGE.md)   { Copy-Item USAGE.md   $stage/ }
+          if (Test-Path PRIVACY.md) { Copy-Item PRIVACY.md $stage/ }
           Copy-Item sample/Master_Input_DEMO.xlsx $stage/
           Copy-Item sample/Master_Input_EMPTY.xlsx $stage/
           Compress-Archive -Path $stage -DestinationPath "dist/AGM_Final_Set-windows-$env:VERSION.zip" -Force
