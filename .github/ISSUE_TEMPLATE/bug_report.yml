@@ -1,0 +1,92 @@
+name: 🐛 Bug Report
+description: Something in the app or the generated document isn't working as expected.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug!
+
+        > ⚠️ **Please do NOT paste real client data.** Use the demo file (`Master_Input_DEMO.xlsx`) or fictional values. Real CINs, PANs, addresses, names, etc. don't belong in a public issue.
+
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: Which release are you on? You'll find it in the binary filename (e.g. `AGM_Final_Set-windows-1.0.6.zip`).
+      placeholder: v1.0.6
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux (source build only)
+    validations:
+      required: true
+
+  - type: input
+    id: os_version
+    attributes:
+      label: OS version
+      description: e.g. Windows 11, macOS 14 Sonoma, macOS 15 Sequoia
+      placeholder: Windows 11
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug. What did you expect to happen, and what actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Numbered steps so we can reproduce on a clean machine.
+        If the bug only appears with a specific Master_Input file, describe the cell values (anonymised!) — or attach a sanitised copy.
+      placeholder: |
+        1. Download `AGM_Final_Set-windows-1.0.6.zip`, unzip
+        2. Double-click `AGM_Final_Set.exe`
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What should have happened instead?
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error log / console output
+      description: |
+        If the app showed an error or a `agm_final_set_error.log` file was created next to the binary, paste its contents here.
+      render: shell
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Drag-and-drop a screenshot here if a visual issue (alignment, formatting, table layout).
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I am running the latest release from [the Releases page](https://github.com/cbsshekhawat18-lab/agm_automation/releases/latest)
+          required: true
+        - label: I searched [existing issues](https://github.com/cbsshekhawat18-lab/agm_automation/issues?q=is%3Aissue) and didn't find a duplicate
+          required: true
+        - label: I have not included any real client data (CIN, PAN, addresses, names) in this report
+          required: true

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Ask a question / start a discussion
+    url: https://github.com/cbsshekhawat18-lab/agm_automation/discussions
+    about: Use Discussions for usage questions, "how do I…" topics, and general feedback. Issues are for confirmed bugs and concrete feature requests only.
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/cbsshekhawat18-lab/agm_automation/security/advisories/new
+    about: Use the private security advisory flow — please do NOT open a public issue for security reports. See SECURITY.md for details.

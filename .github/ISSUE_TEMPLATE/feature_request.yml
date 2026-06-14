@@ -1,0 +1,76 @@
+name: ✨ Feature Request
+description: Suggest a new section, toggle, or document type.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion! A few notes before you write:
+
+        - This app is for **Indian Private Limited companies** specifically. Features for Public companies, LLPs, OPCs, or foreign entities are nice-to-have but lower priority.
+        - This is a **local desktop tool**. We will never add cloud features, AI features, telemetry, or anything that needs network access. See [PRIVACY.md](PRIVACY.md).
+        - **Data lives in Excel. Logic + wording lives in Python.** New cells go on the Master_Input tabs; new paragraphs go in `scripts/gen_final_set.py`.
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: What's the use case?
+      description: |
+        Describe the real-world scenario — which client, which AGM, what does the current doc fail to capture?
+        The more specific, the easier it is to evaluate the feature.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: |
+        How should it work? Where in the doc should new content appear? What goes in the Excel vs. what's hardcoded?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      multiple: true
+      options:
+        - New Master_Input tab or column
+        - New toggle on the Toggles tab
+        - New paragraph / section in Director's Report
+        - New paragraph / section in Notice of AGM
+        - New annexure or resolution page
+        - New validation rule
+        - Doc formatting (fonts, spacing, alignment, tables)
+        - Wording change to existing text
+        - Build / packaging / release process
+        - Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: Statutory reference (if applicable)
+      description: |
+        Section / Rule / Form citation from the Companies Act, 2013 or related rules.
+        Helps confirm the feature actually corresponds to a compliance requirement.
+      placeholder: e.g. Section 134(3)(o), Rule 8 of Companies (Accounts) Rules, 2014
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other ways you've thought about solving this, and why they're worse.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I searched [existing issues](https://github.com/cbsshekhawat18-lab/agm_automation/issues?q=is%3Aissue) and [discussions](https://github.com/cbsshekhawat18-lab/agm_automation/discussions) and didn't find a duplicate
+          required: true
+        - label: This feature does NOT require network access, telemetry, or cloud services
+          required: true
